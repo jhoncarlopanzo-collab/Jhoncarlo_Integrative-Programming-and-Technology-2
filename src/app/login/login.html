@@ -28,21 +28,21 @@
     <input type="password" [(ngModel)]="confirmPassword" placeholder="Confirm Password">
     <button (click)="register()">Register</button>
     <table *ngIf="users.length > 0" class="user-table">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Password</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.email }}</td>
-      <td>{{ user.password }}</td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.email }}</td>
+          <td>{{ user.password }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
+  
 </div>
 
 
