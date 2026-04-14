@@ -72,3 +72,9 @@
   background: #333;
   color: white;
 }
+.error {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}

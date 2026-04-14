@@ -25,8 +25,8 @@ private router = inject(Router);
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
-      confirmPassword: [''],
-      email: ['', [Validators.email]]
+      confirmPassword: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
     });
     
   }
@@ -41,15 +41,15 @@ private router = inject(Router);
     const { username, password, confirmPassword, email } = this.loginForm.value;
 
     
-    if (!username || !password || !email) {
-      alert('Please fill all required fields');
-      return;
-    }
+    if (this.loginForm.invalid) {
+  this.loginForm.markAllAsTouched(); // show all errors
+  return;
+}
 
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
+if (password !== confirmPassword) {
+  alert('Passwords do not match');
+  return;
+}
 
     const newUser = { username, password, email };
 

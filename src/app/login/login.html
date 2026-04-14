@@ -27,9 +27,29 @@
     <form [formGroup]="loginForm">
 
       <input type="text" formControlName="username" placeholder="Username">
+
+      <div class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+        Username is required (min 3 characters)
+      </div>
       <input type="email" formControlName="email" placeholder="Email">
+
+      <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+        Valid email is required
+      </div>
       <input type="password" formControlName="password" placeholder="Password">
+
+      <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+        Password must be 5–10 characters
+      </div>
       <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+
+      <div class="error" *ngIf="loginForm.get('confirmPassword')?.touched && loginForm.get('confirmPassword')?.invalid">
+        Confirm password is required
+      </div>
+      <div class="error"
+  *ngIf="loginForm.value.password !== loginForm.value.confirmPassword && loginForm.get('confirmPassword')?.touched">
+  Passwords do not match
+</div>
 
     </form>
 
