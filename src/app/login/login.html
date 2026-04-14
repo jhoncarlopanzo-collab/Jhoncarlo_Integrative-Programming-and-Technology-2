@@ -47,9 +47,9 @@
         Confirm password is required
       </div>
       <div class="error"
-  *ngIf="loginForm.value.password !== loginForm.value.confirmPassword && loginForm.get('confirmPassword')?.touched">
-  Passwords do not match
-</div>
+        *ngIf="loginForm.value.password !== loginForm.value.confirmPassword && loginForm.get('confirmPassword')?.touched">
+        Passwords do not match
+      </div>
 
     </form>
 

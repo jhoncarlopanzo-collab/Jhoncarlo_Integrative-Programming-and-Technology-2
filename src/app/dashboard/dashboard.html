@@ -1,5 +1,48 @@
 <!-- DASHBOARDS -->
 <div *ngIf="currentView === 'admin'" class="dashboard">
-  <h1>Admin Dashboard</h1>
-  <button (click)="logout()">Logout</button>
+  <h1>Hotel Management Dashboard</h1>
+  
+  <!-- Search Section -->
+  <div class="search-section">
+    <input 
+      type="text" 
+      placeholder="Search by hotel name or location..." 
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Hotels List -->
+  <div class="hotels-container">
+    <table *ngIf="paginatedHotels.length > 0" class="hotels-table">
+      <thead>
+        <tr>
+          <th>Hotel Name</th>
+          <th>Location</th>
+          <th>Rating</th>
+          <th>Price/Night</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hotel of paginatedHotels">
+          <td>{{ hotel.name }}</td>
+          <td>{{ hotel.location }}</td>
+          <td>{{ hotel.rating }} ⭐</td>
+          <td>${{ hotel.pricePerNight }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="paginatedHotels.length === 0" class="no-results">No hotels found</p>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-section" *ngIf="totalPages > 1">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
+  <!-- Logout -->
+  <button (click)="logout()" class="logout-btn">Logout</button>
 </div>
