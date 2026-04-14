@@ -1,95 +1,94 @@
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router'; 
+import { routes } from '../app.routes';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.css'
 })
 export class Login {
 
-  username = '';
-  password = '';
-  confirmPassword = '';
+  private fb = inject(FormBuilder);
 
-  showLogin = false;
-  showSignUp = false;
+  isSignUpMode = false;
 
-  users: { email: string; password: string }[] = [];
+  loginForm: FormGroup;
 
-  currentView: 'home' | 'admin' | 'user' = 'home';
-
-  // Toggle Login Sidebar
-  toggleLogin() {
-    this.showLogin = !this.showLogin;
-    this.showSignUp = false; // close signup if open
+  users: any[] = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+private router = inject(Router);
+  constructor() {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+      confirmPassword: [''],
+      email: ['', [Validators.email]]
+    });
+    
   }
 
-  // Toggle Signup Sidebar
+  
   toggleSignUp() {
-    this.showSignUp = !this.showSignUp;
-    this.showLogin = false; // close login if open
+    this.isSignUpMode = !this.isSignUpMode;
   }
 
-  // LOGIN FUNCTION
-  login() {
-    if (!this.username || !this.password) {
-      alert('Please fill in all fields');
+  
+  register() {
+    const { username, password, confirmPassword, email } = this.loginForm.value;
+
+    
+    if (!username || !password || !email) {
+      alert('Please fill all required fields');
       return;
     }
 
-    if (this.username === 'admin123' && this.password === '1234') {
-      this.currentView = 'admin';
-      this.resetFields();
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
     }
-    else if (this.username === 'user123' && this.password === '1234') {
-      this.currentView = 'user';
-      this.resetFields();
+
+    const newUser = { username, password, email };
+
+    this.users.push(newUser);
+
+    localStorage.setItem('registeredUsers', JSON.stringify(this.users));
+
+    alert('User Registered!');
+
+    this.loginForm.reset();
+    this.isSignUpMode = false;
+  }
+
+  
+  login() {
+    const { username, password } = this.loginForm.value;
+
+    if (username === 'admin' && password === 'admin123') {
+      alert('Admin Login');
+      this.router.navigate(['/dashboard']);
+      return;
     }
-    else {
-      alert('Invalid credentials');
+
+    const userExists = this.users.find(
+      u => u.username === username && u.password === password
+    );
+
+    if (userExists) {
+      alert(`Welcome, ${username}!`);
+    } else {
+      alert('Invalid username or password.');
     }
   }
 
-  // REGISTER FUNCTION
- register() {
-  if (!this.username || !this.password || !this.confirmPassword) {
-    alert('Please fill in all fields');
-    return;
-  }
-
-  if (this.password !== this.confirmPassword) {
-    alert('Passwords do not match');
-    return;
-  }
-
-  // ✅ Save user
-  this.users.push({
-    email: this.username,
-    password: this.password
-  });
-
-  alert('Registration successful!');
-
-  this.resetFields();
-}
-
-  // LOGOUT
-  logout() {
-    this.currentView = 'home';
-    this.showLogin = false;
-    this.showSignUp = false;
-    this.resetFields();
-  }
-
-  // CLEAR INPUTS
-  resetFields() {
-    this.username = '';
-    this.password = '';
-    this.confirmPassword = '';
+  // 🗑 CLEAR USERS
+  clearTable() {
+    if (confirm('Are you sure?')) {
+      localStorage.removeItem('registeredUsers');
+      this.users = [];
+    }
   }
 }
