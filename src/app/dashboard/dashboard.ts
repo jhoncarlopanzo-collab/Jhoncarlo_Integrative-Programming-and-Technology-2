@@ -18,4 +18,8 @@ export class Dashboard {
     localStorage.removeItem('currentUser');
     window.location.href = '/login';
   }
+  goToPortfolio() { 
+    this.router.navigate(['/portfolio']);
+  }
+
 }
