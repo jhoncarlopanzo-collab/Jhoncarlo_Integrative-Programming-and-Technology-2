@@ -53,7 +53,9 @@ export class Dashboard implements OnInit, OnDestroy {
   onSearchChange(value: string): void {
     this.searchSubject.next(value);
   }
-
+  goToPortfolio() {
+    this.router.navigate(['/portfolio']);
+  }
   get totalPages(): number {
     return this.hotelService.calculateTotalPages(
       this.displayedHotels.length,

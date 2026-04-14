@@ -42,7 +42,7 @@
     <span>Page {{ currentPage }} of {{ totalPages }}</span>
     <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
   </div>
-
+  <button (click)="goToPortfolio()" >Portfolio</button>
   <!-- Logout -->
   <button (click)="logout()" class="logout-btn">Logout</button>
 </div>
