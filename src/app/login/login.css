@@ -1,0 +1,124 @@
+.main-container {
+  height: 100vh;
+  background: url('/background.jpg') center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+}
+
+/* Buttons */
+.login-toggle, .signup-toggle {
+  position: absolute;
+  top: 20px;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-toggle {
+  right: 20px;
+  background: blue;
+}
+
+.signup-toggle {
+  right: 120px;
+  background: green;
+}
+
+/* Center content */
+.content {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  padding: 20px;
+  transition: 0.3s ease;
+  z-index: 10;
+
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+/* Close button FIXED */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+
+  background: none;
+  border: none;
+
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
+/* Inputs */
+.sidebar input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Buttons */
+.sidebar button:not(.close) {
+  width: 100%;
+  padding: 10px;
+  background: rgb(19, 20, 19);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Dashboard */
+.dashboard {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.user-table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  background: white;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.user-table th {
+  background: #333;
+  color: white;
+}

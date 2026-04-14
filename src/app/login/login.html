@@ -1,0 +1,57 @@
+<div *ngIf="currentView === 'home'" class="main-container">
+
+  <div class="overlay"></div>
+
+  <button class="login-toggle" (click)="toggleLogin()">Login</button>
+  <button class="signup-toggle" (click)="toggleSignUp()">Sign Up</button>
+
+  <div class="content">
+    <h1>Welcome to Hotel Management System</h1>
+    <p>Please login or register</p>
+  </div>
+
+  
+  <div class="sidebar" [class.open]="showLogin">
+    <button class="close" (click)="toggleLogin()">×</button>
+    <h2>Login</h2>
+    <input type="email" [(ngModel)]="username" placeholder="Email">
+    <input type="password" [(ngModel)]="password" placeholder="Password">
+    <button (click)="login()">Login</button>
+  </div>
+
+  
+  <div class="sidebar" [class.open]="showSignUp">
+    <button class="close" (click)="toggleSignUp()">×</button>
+    <h2>Sign Up</h2>
+    <input type="email" [(ngModel)]="username" placeholder="Email">
+    <input type="password" [(ngModel)]="password" placeholder="Password">
+    <input type="password" [(ngModel)]="confirmPassword" placeholder="Confirm Password">
+    <button (click)="register()">Register</button>
+    <table *ngIf="users.length > 0" class="user-table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.email }}</td>
+      <td>{{ user.password }}</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+
+<div *ngIf="currentView === 'admin'" class="dashboard">
+  <h1>Admin Dashboard</h1>
+  <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="currentView === 'user'" class="dashboard">
+  <h1>User Dashboard</h1>
+  <button (click)="logout()">Logout</button>
+</div>
