@@ -1,0 +1,22 @@
+<div class="main-container">
+  <div class="overlay"></div>
+
+  <button class="login-toggle" (click)="toggleLogin()">Login</button>
+
+  <div class="content">
+    <h1>Welcome to Hotel Management System</h1>
+    <button class="portfolio-btn" [routerLink]="['/portfolio']">Go to Portfolio</button>
+    <p>Please login to continue</p>
+  </div>
+
+  <div class="login-sidebar" [class.open]="showLogin">
+    <button class="close-sidebar" (click)="toggleLogin()">×</button>
+
+    <h2>Login</h2>
+
+    <input type="text" [(ngModel)]="username" placeholder="Username">
+    <input type="password" [(ngModel)]="password" placeholder="Password">
+
+    <button (click)="login()">Login</button>
+  </div>
+</div>
