@@ -1,0 +1,32 @@
+
+.portfolio-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f7f7f7; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+
+.portfolio-container h1 {
+  color: #2c3e50;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+
+.info p {
+  font-size: 18px;
+  color: #34495e;
+  margin: 8px 0;
+}
+
+.bio {
+  margin-top: 25px;
+  font-size: 20px;
+  color: #16a085;
+  font-style: italic;
+}
