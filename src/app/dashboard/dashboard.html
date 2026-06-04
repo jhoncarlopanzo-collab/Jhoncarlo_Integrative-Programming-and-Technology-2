@@ -1,0 +1,60 @@
+<section class="dashboard-shell">
+  <aside class="sidebar-card">
+    <div>
+      <p class="eyebrow">Panzo Hotel</p>
+      <h1>Hotel overview</h1>
+      <p class="muted">A simple dashboard for room status, arrivals, and guest service.</p>
+    </div>
+
+    <div class="profile-box">
+      <div class="avatar">{{ userLabel.charAt(0).toUpperCase() }}</div>
+      <div>
+        <strong>{{ userLabel }}</strong>
+        <p>{{ roleLabel }}</p>
+      </div>
+    </div>
+
+    <button class="ghost-btn" type="button" (click)="logout()">Logout</button>
+  </aside>
+
+  <main class="main-grid">
+    <header class="hero-card">
+      <div>
+        <p class="eyebrow">Good morning</p>
+        <h2>Welcome back, {{ userLabel }}.</h2>
+        <p class="muted">Your hotel operations are running smoothly. Check the key numbers and today's priorities below.</p>
+      </div>
+      <div class="pill-box">Today: 24 rooms ready</div>
+    </header>
+
+    <article class="stats-grid">
+      <div class="stat-card" *ngFor="let item of stats">
+        <p>{{ item.label }}</p>
+        <strong>{{ item.value }}</strong>
+        <span>{{ item.detail }}</span>
+      </div>
+    </article>
+
+    <article class="panel-card">
+      <div class="panel-heading">
+        <h3>Today's priorities</h3>
+        <span>Hotel operations</span>
+      </div>
+      <ul class="task-list">
+        <li *ngFor="let task of tasks">{{ task }}</li>
+      </ul>
+    </article>
+
+    <article class="panel-card">
+      <div class="panel-heading">
+        <h3>Guest highlights</h3>
+        <span>Live summary</span>
+      </div>
+      <div class="chip-row">
+        <span class="chip">12 check-outs</span>
+        <span class="chip">3 late arrivals</span>
+        <span class="chip">5 spa reservations</span>
+      </div>
+    </article>
+  </main>
+</section>
